@@ -1,0 +1,35 @@
+version: '3'
+
+networks:
+  air_miles_newsletter:
+    driver: bridge
+
+services:
+  air_miles_newsletter_db:
+    image: docker.io/bitnami/postgresql:14
+    container_name: air_miles_newsletter_db
+    restart: always
+    tty: true
+    environment:
+      - POSTGRESQL_USERNAME=root
+      - POSTGRESQL_PASSWORD==root
+      - POSTGRESQL_DB=air_miles_newsletter
+    volumes:
+      - /var/docker/postgresql:/bitnami/postgresql
+    networks:
+      - air_miles_newsletter
+    ports:
+      - "5434:5432"
+
+  air_miles_newsletter_node:
+    build: .
+    container_name: air_miles_newsletter_node
+    entrypoint: dockerize -wait tcp://air_miles_newsletter_db:5432 -timeout 20s yarn start
+    tty: true
+    restart: always
+    networks:
+      - air_miles_newsletter
+    depends_on:
+      - air_miles_newsletter_db
+    ports:
+      - '3334:3334'
