@@ -12,5 +12,9 @@ TypeormHelper.getInstance()
       // eslint-disable-next-line no-console
       console.log(`Listening on port ${env.apiPort}`);
     });
+
+    const { makeRabbitMQBroker } = await import('../factories/makeRabbitMQBroker');
+    const broker = makeRabbitMQBroker();
+    await broker.start();
   })
   .catch(console.log);

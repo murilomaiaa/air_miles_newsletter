@@ -1,10 +1,7 @@
 import { CreateSubscribersController } from '@/application/controllers/CreateSubscribersController';
-import { CreateSubscriber } from '@/domain/features/CreateSubscriber';
-import { repositories } from '../repositories';
+import { services } from '../services';
 
 export function makeCreateSubscribersController() {
-  const subscribersRepository = repositories.ISubscribersRepository;
-  const tagsRepository = repositories.ITagsRepository;
-  const service = new CreateSubscriber(subscribersRepository, tagsRepository);
+  const service = services.createSubscriber;
   return new CreateSubscribersController(service);
 }
