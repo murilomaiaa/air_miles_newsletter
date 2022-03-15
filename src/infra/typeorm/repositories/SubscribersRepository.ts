@@ -11,6 +11,10 @@ export class SubscribersRepository implements ISubscribersRepository {
     this.repository = getRepository(SubscriberDB);
   }
 
+  findByTagName(_: string): Promise<Subscriber[]> {
+    throw new Error('Method not implemented.');
+  }
+
   async findByEmail(email: string): Promise<Subscriber | undefined> {
     const subscriber = await this.repository.findOne({ where: { email } });
 

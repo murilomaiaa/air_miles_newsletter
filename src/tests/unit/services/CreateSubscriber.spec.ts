@@ -15,10 +15,12 @@ describe('CreateSubscriber', () => {
     subscribersRepository = {
       findByEmail: jest.fn().mockResolvedValue(undefined),
       save: jest.fn().mockImplementation(async subscriber => subscriber),
+      findByTagName: jest.fn(),
     };
 
     tagsRepository = {
       findOrCreateByName: jest.fn().mockImplementation(async name => makeFakeTag(name)),
+      findByName: jest.fn(),
     };
 
     args = {

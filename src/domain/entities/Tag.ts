@@ -1,4 +1,5 @@
 import { BaseEntity, BaseEntityProps } from './BaseEntity';
+import { SubscriberProps } from './Subscriber';
 
 export type TagPartial = {
   id: string;
@@ -7,6 +8,7 @@ export type TagPartial = {
 
 export type TagProps = BaseEntityProps & {
   name: string;
+  subscribers?: SubscriberProps[];
 };
 
 export class Tag extends BaseEntity {
