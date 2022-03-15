@@ -29,6 +29,14 @@ export class Subscriber extends BaseEntity {
     this.tag = props.tag instanceof Tag ? props.tag : new Tag(props.tag);
   }
 
+  getEmail() {
+    return this.email;
+  }
+
+  getName() {
+    return this.email;
+  }
+
   toDto(): SubscriberDTO {
     return {
       id: this.id,
