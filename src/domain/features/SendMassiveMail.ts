@@ -41,7 +41,7 @@ export class SendMassiveMail implements ISendMassiveMail {
     });
 
     return {
-      numberOfSubscribers: 0,
+      numberOfSubscribers: subscribers.length,
     };
   }
 }

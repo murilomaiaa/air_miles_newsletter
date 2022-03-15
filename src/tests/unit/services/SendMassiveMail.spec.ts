@@ -89,4 +89,22 @@ describe('SendMassiveMail', () => {
       ],
     });
   });
+
+  it('should call sendMail with all subscribers', async () => {
+    const s1 = makeFakeSubscriber();
+    const s2 = new Subscriber({
+      id: '7925d676-0441-4dc7-8a98-00749dcd0725',
+      email: 'any-email2',
+      name: 'any-name2',
+      idAtCore: 'any_id_at_core2',
+      tag: { name: 'any-tag', id: 'cb2a43e8-e092-4b23-a2d3-0de376f8632d' },
+    });
+    subscribersRepository.findByTagName.mockResolvedValueOnce([s1, s2]);
+
+    const data = await systemUnderTests.execute(args);
+
+    expect(data).toEqual({
+      numberOfSubscribers: 2,
+    });
+  });
 });
