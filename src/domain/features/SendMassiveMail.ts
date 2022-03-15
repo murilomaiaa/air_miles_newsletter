@@ -1,3 +1,4 @@
+import AppError from '@/main/errors/AppError';
 import { ITagsRepository } from '../repositories';
 
 export namespace SendMassiveMailDTO {
@@ -18,7 +19,9 @@ export class SendMassiveMail implements ISendMassiveMail {
   constructor(private readonly tagsRepository: ITagsRepository) {}
 
   async execute({ tagName }: SendMassiveMailDTO.Input): Promise<SendMassiveMailDTO.Output> {
-    await this.tagsRepository.findByName(tagName);
+    const tag = await this.tagsRepository.findByName(tagName);
+    if (!tag) throw new AppError('Tag not found');
+
     return {
       numberOfSubscribers: 0,
     };
