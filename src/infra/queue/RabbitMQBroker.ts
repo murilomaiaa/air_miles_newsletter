@@ -12,11 +12,8 @@ export class RabbitMQBroker {
     await this.server.start();
 
     await this.server.assertQueue('CreateCard');
-    await this.server.consumeQueue(
-      'CreateCard',
-      Object.bind(async (data: any) => {
-        await this.createSubscriber.consume(data);
-      }),
-    );
+    await this.server.consumeQueue('CreateCard', async (data: any) => {
+      await this.createSubscriber.consume(data);
+    });
   }
 }

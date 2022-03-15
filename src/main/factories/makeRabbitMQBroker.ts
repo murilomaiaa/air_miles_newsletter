@@ -1,6 +1,8 @@
+import { CreateSubscriberConsumer } from '@/application/queue/consumers/CreateSubscriberConsumer';
 import { RabbitMQBroker } from '@/infra/queue';
 import { services } from './services';
 
 export function makeRabbitMQBroker() {
-  return new RabbitMQBroker(services.createSubscriber);
+  const consumer = new CreateSubscriberConsumer(services.createSubscriber);
+  return new RabbitMQBroker(consumer);
 }

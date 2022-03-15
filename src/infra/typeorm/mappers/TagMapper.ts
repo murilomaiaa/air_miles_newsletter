@@ -7,9 +7,6 @@ export class TagMapper {
       id: p.id,
       name: p.name,
       createdAt: p.createdAt,
-      deletedAt: p.deletedAt,
-      updatedAt: p.updatedAt,
-      updatedBy: p.updatedBy,
     });
   }
 }
