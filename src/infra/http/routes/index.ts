@@ -1,12 +1,18 @@
 import { Router } from 'express';
-import { makeCreateSubscribersController } from '@/main/factories/controllers/makeCreateSubscribersController';
+import { makeCreateSubscribersController, makeSendMassiveMailsController } from '@/main/factories/controllers';
 
 const routes = Router();
 
-const controller = makeCreateSubscribersController();
+const subscriberController = makeCreateSubscribersController();
+const sendMassiveMailsController = makeSendMassiveMailsController();
 
-routes.post(controller.path, async (req, res) => {
-  const { body, status } = await controller.handle(req);
+routes.post(subscriberController.path, async (req, res) => {
+  const { body, status } = await subscriberController.handle(req);
+  return res.status(status).json(body);
+});
+
+routes.post(sendMassiveMailsController.path, async (req, res) => {
+  const { body, status } = await sendMassiveMailsController.handle(req);
   return res.status(status).json(body);
 });
 
