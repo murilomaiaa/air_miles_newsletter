@@ -19,6 +19,7 @@ export class TypeormHelper {
   async connect(): Promise<void> {
     const migrations = await this.getMigrations();
     const entities = await this.getEntities();
+    console.log({ db: env.db });
     this.connection = await createConnection({
       ...env.db,
       migrations,
