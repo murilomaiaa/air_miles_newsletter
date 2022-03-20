@@ -1,5 +1,5 @@
 import env from '@/main/config/env';
-import { subscribersRoute } from './routes/subscriber.doc';
+import { massiveMailRoute, subscribersRoute } from './routes';
 
 export default {
   openapi: '3.0.0',
@@ -14,8 +14,8 @@ export default {
       description: 'Server running local',
     },
   ],
-  // apis: ['./src/infra/http/docs/**/**.doc.ts'],
   paths: {
     ...subscribersRoute,
+    ...massiveMailRoute,
   },
 };

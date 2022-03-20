@@ -1,8 +1,8 @@
 import { makeSendMassiveMailsController } from '@/main/factories/controllers';
-import { subscriber } from '../dtos/subscriberDto.doc';
+import { massiveMail } from '../dtos/massiveMailDto.doc';
 import { make201, make400, make500 } from '../responses.doc';
 
-export const subscribersRoute = {
+export const massiveMailRoute = {
   [makeSendMassiveMailsController().path]: {
     post: {
       tags: ['MassiveMails'],
@@ -11,8 +11,8 @@ export const subscribersRoute = {
         required: true,
         content: {
           'application/json': {
-            schema: subscriber.schema,
-            example: subscriber.example,
+            schema: massiveMail.schema,
+            example: massiveMail.example,
           },
         },
       },
@@ -20,9 +20,9 @@ export const subscribersRoute = {
         '201': make201({
           type: 'object',
           properties: {
-            id: {
-              type: 'string',
-              example: 'b765ae09-012a-420e-96c2-ad5f0f0f9019',
+            numberOfSubscribers: {
+              type: 'number',
+              example: 78,
             },
           },
         }),
@@ -35,7 +35,7 @@ export const subscribersRoute = {
             },
             message: {
               type: 'string',
-              example: 'Email already used',
+              example: 'Tag not found',
             },
           },
         }),
