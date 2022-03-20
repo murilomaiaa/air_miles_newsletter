@@ -12,8 +12,14 @@ export class TagsRepository implements ITagsRepository {
     this.repository = getRepository(TagDB);
   }
 
-  findByName(_: string): Promise<Tag | undefined> {
-    throw new Error('Method not implemented.');
+  async findByName(name: string): Promise<Tag | undefined> {
+    const tag = await this.repository.findOne({ where: { name } });
+    let t = undefined;
+
+    if (tag) {
+      t = TagMapper.mapOne(tag);
+    }
+    return t;
   }
 
   async findOrCreateByName(name: string): Promise<Tag> {
