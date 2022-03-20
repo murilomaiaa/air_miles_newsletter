@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  air_miles_rabbitmq:
+    image: "rabbitmq:3.8-management-alpine"
+    container_name: air_miles_rabbitmq
+    hostname: air_miles_rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+
+  air_miles_newsletter_db:
+    image: postgres:13-alpine
+    container_name: air_miles_newsletter_db
+    restart: always
+    tty: true
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=air_miles_newsletter
+    ports:
+      - '5432:5432'
